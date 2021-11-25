@@ -28,6 +28,11 @@ public class SellButton : UIButton
         if (_menu)
         {
             _menu.InventoryUi.SelectedItem.MyItem.Sell();
+            if (_menu.InventoryUi.SelectedItem.MyItem.Amount == 0)
+            {
+                _menu.InventoryUi.UnselectItem();
+                _menu.gameObject.SetActive(false);
+            }
         }
     }
 }

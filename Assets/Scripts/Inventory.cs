@@ -94,7 +94,7 @@ public class Inventory : Observer
                 }
                 break;
             case ObserverEvent.ItemSold:
-                _money += itm.SellValue;
+                _money += itm.SellValue;   
                 break;
             default:
                 break;

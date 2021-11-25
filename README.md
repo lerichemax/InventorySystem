@@ -13,3 +13,7 @@ Tab - Show/Hide inventory;
 5 - Add a magical object
 
 Navigation with mouse or keyboard or controller.
+
+To be added:
+- A way to modify the maximum stockable amount of items per category.
+- Scrolling

@@ -1,6 +1,6 @@
 # InventorySystem
 
-First inventory system made with Unity.
+My first inventory system made with Unity.
 
 Controls : 
 

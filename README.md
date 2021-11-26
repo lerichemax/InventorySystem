@@ -1,4 +1,4 @@
-# InventorySystem
+# Inventory system
 
 My first inventory system made with Unity.
 

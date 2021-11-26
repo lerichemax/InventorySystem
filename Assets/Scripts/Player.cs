@@ -9,11 +9,12 @@ public class Player : MonoBehaviour
     private InventoryUI _inventoryUi;
     private Inventory _inventory;
     private TestItemAdder _itemAdder;
-    bool _isInventoryActive;
+    private GameManager _gameManager;
 
     void Awake()
     {
         _inventoryUi = FindObjectOfType<InventoryUI>();
+        _gameManager = FindObjectOfType<GameManager>();
         _inventory = GetComponent<Inventory>();
         _itemAdder = GetComponent<TestItemAdder>();
     }
@@ -30,15 +31,16 @@ public class Player : MonoBehaviour
     {
         if(Input.GetButtonUp("ShowInventory") && _inventoryUi)
         {
-            if (_isInventoryActive)
+            if (_gameManager.IsPaused)
             {
+                _gameManager.SetPause(false);
                 _inventoryUi.gameObject.SetActive(false);
             }
             else
             {
+                _gameManager.SetPause(true);
                 _inventoryUi.gameObject.SetActive(true);
             }
-            _isInventoryActive = !_isInventoryActive;
         }
         else if (Input.GetButtonUp("AddMelee"))
         {

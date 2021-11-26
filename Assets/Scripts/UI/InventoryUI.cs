@@ -36,7 +36,7 @@ public class InventoryUI : MonoBehaviour
 
     private int _activeCategoryIdx;
 
-    void Awake()
+    void Start()
     {
         _inventory = FindObjectOfType<Inventory>();
 

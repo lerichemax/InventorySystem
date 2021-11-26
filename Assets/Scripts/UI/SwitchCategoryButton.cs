@@ -33,7 +33,6 @@ public class SwitchCategoryButton : UIButton
     private void Update()
     {
         float axisValue = Input.GetAxisRaw("Horizontal");
-        Debug.Log(axisValue.ToString());
         if (EventSystem.current.currentSelectedGameObject == gameObject && !_axisLocked && axisValue != 0 && !_isLocked)
         {
             EventSystem.current.SetSelectedGameObject(null);

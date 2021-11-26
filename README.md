@@ -12,6 +12,8 @@ Controls :
 - 5 -> Add a magical object
 
 Navigation with mouse or keyboard or controller.
+Possibility to change the amount of inventory slot by category (via InventorySettings script)
+Possibility to change the amount of stackable item per item (via Item script)
 
 To be added:
 - Scrolling

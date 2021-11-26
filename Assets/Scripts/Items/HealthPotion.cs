@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HealthPotion : Consumable
 {
+    [Space]
     [SerializeField] private float _healthToRestore;
 
     protected override void Consume()

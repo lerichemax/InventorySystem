@@ -6,37 +6,37 @@ using UnityEngine;
 [RequireComponent(typeof(Inventory))]
 public class Player : MonoBehaviour
 {
-    [SerializeField] private InventoryUI _inventoryUI;
+    private InventoryUI _inventoryUi;
     private Inventory _inventory;
     private TestItemAdder _itemAdder;
     bool _isInventoryActive;
 
     void Awake()
     {
+        _inventoryUi = FindObjectOfType<InventoryUI>();
         _inventory = GetComponent<Inventory>();
         _itemAdder = GetComponent<TestItemAdder>();
     }
 
     private void Start()
     {
-        if (_inventoryUI && _inventoryUI.gameObject.activeInHierarchy)
+        if (_inventoryUi && _inventoryUi.gameObject.activeInHierarchy)
         {
-            _inventoryUI.gameObject.SetActive(false);
+            _inventoryUi.gameObject.SetActive(false);
         }
-        _inventory.InventoryUi = _inventoryUI;
     }
 
     void Update()
     {
-        if(Input.GetButtonUp("ShowInventory") && _inventoryUI)
+        if(Input.GetButtonUp("ShowInventory") && _inventoryUi)
         {
             if (_isInventoryActive)
             {
-                _inventoryUI.gameObject.SetActive(false);
+                _inventoryUi.gameObject.SetActive(false);
             }
             else
             {
-                _inventoryUI.gameObject.SetActive(true);
+                _inventoryUi.gameObject.SetActive(true);
             }
             _isInventoryActive = !_isInventoryActive;
         }

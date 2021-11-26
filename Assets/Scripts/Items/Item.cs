@@ -45,6 +45,12 @@ public abstract class Item : Subject
         set { _amount = value; }
     }
 
+    [SerializeField] protected int _maxAmount = 5;
+    public int MaxAmount
+    {
+        get { return _maxAmount; }
+    }
+
     public abstract void UseItem();
 
     protected void RemoveAnItem()
@@ -62,5 +68,13 @@ public abstract class Item : Subject
     {
         Notify(this, ObserverEvent.ItemSold);
         RemoveAnItem();
+    }
+
+    private void OnValidate()
+    {
+        if (_maxAmount < 0)
+        {
+            _maxAmount = 0;
+        }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class MeleeWeapon : Item
 {
+    [Space]
     [SerializeField] protected float _damage;
 
     void Awake()

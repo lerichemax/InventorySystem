@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ManaPotion : Consumable
 {
+    [Space]
     [SerializeField] private float _manaToRestore;
 
     protected override void Consume()

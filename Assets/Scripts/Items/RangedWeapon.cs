@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class RangedWeapon : Item
 {
+    [Space]
     [SerializeField] protected float _rangedDamage;
     [SerializeField] protected float _range;
 

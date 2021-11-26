@@ -48,3 +48,4 @@ MonoBehaviour:
   _description: Sell for coins or keep it. It might be useful later...
   _image: {fileID: 2800000, guid: 3a56b83f5b1cb5a4caf71ef2452420af, type: 3}
   _sellValue: 1500
+  _maxAmount: 2

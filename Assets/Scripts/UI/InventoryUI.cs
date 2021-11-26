@@ -59,14 +59,16 @@ public class InventoryUI : MonoBehaviour
                         listHolder.SetActive(true);
                     }
                     _itemsUiObjects.Add(new List<GameObject>());
-                    for (int j = 0; j < _inventory.MaxInventorySlot; j++)
+                    int maxSlots = _inventory.GetMaxInventorySlots(i);
+                    for (int j = 0; j < maxSlots; j++)
                     {
                         AddItemSlot(ref nexItemPos, listHolder.GetComponent<RectTransform>(), i);
                     }
+
                     GameObject contextualMenu = Instantiate(_contextualMenuPrefab, listHolder.transform);
                     contextualMenu.GetComponent<ContextualMenu>().InventoryUi = this;
 
-                    for (int j = 0; j < _inventory.ItemsByCategory.Count; j++)
+                    for (int j = 0; j < maxSlots; j++)
                     {
                         _itemsUiObjects[i][j].GetComponent<ItemButton>().ContextualMenu = contextualMenu;
                     }
@@ -108,7 +110,8 @@ public class InventoryUI : MonoBehaviour
     public void UpdateListItem(Item.Type itemType)
     {
         int idx = (int)itemType;
-        for (int i = 0; i < _inventory.MaxInventorySlot; i++)
+        int maxSlots = _inventory.GetMaxInventorySlots(idx);
+        for (int i = 0; i < maxSlots; i++)
         {
             if (i >= _inventory.ItemsByCategory[idx].Items.Count)
             {

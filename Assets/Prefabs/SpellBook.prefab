@@ -48,5 +48,6 @@ MonoBehaviour:
   _description: Powerful magial book
   _image: {fileID: 2800000, guid: 8fa6570be220b1a4e80f33e38f8fa274, type: 3}
   _sellValue: 500
+  _maxAmount: 1
   _magicalDamage: 50
   _radius: 20

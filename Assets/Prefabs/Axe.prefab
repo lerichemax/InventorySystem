@@ -48,4 +48,5 @@ MonoBehaviour:
   _description: Slice enemies and do damage
   _image: {fileID: 2800000, guid: 860c06e1f19f3fe4887332131a202b8d, type: 3}
   _sellValue: 50
+  _maxAmount: 2
   _damage: 10

@@ -48,4 +48,5 @@ MonoBehaviour:
   _description: Restores health
   _image: {fileID: 2800000, guid: 5416c6dc839f0e14da662d4e5948e179, type: 3}
   _sellValue: 20
+  _maxAmount: 10
   _healthToRestore: 25

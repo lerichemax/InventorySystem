@@ -3,16 +3,9 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(InventorySettings))]
 public class Inventory : Observer
-{
-    [SerializeField] private int _maxInventorySlot = 10;
-    [SerializeField] private int _maxStackableItem = 5;
-
-    public int MaxInventorySlot
-    {
-        get { return _maxInventorySlot; }
-    }
-
+{ 
     private List<ItemCategoryList> _itemsByCategory = new List<ItemCategoryList>();
     public List<ItemCategoryList> ItemsByCategory
     {
@@ -20,10 +13,7 @@ public class Inventory : Observer
     }
 
     private InventoryUI _inventoryUi;
-    public InventoryUI InventoryUi
-    {
-        set { _inventoryUi = value; }
-    }
+    private InventorySettings _inventorySettings;
 
     private int _money;
     public int Money
@@ -33,6 +23,8 @@ public class Inventory : Observer
 
     private void Awake()
     {
+        _inventoryUi = FindObjectOfType<InventoryUI>();
+        _inventorySettings = GetComponent<InventorySettings>();
         for (int i = 0; i < Enum.GetValues(typeof(Item.Type)).Length; i++)
         {
             _itemsByCategory.Add(new ItemCategoryList((Item.Type)i));
@@ -45,10 +37,22 @@ public class Inventory : Observer
 
         int idx = FindFirstAvailableSlotIndexByName(_itemsByCategory[(int)newItem.ItemType].Items, newItem.Name);
 
+        int maxInventorySlot;
+        int maxStackable = newItem.MaxAmount;
+        InventorySettings.CategorySettings settings = new InventorySettings.CategorySettings();
+        if (_inventorySettings.GetSettings(newItem.ItemType, ref settings))
+        {
+            maxInventorySlot = settings.MaxInventorySlots;
+        }
+        else
+        {
+            maxInventorySlot = _inventorySettings.DefaultMaxInventorySlot;
+        }
+
         if (idx != -1)
         {
-            if (_itemsByCategory[(int)newItem.ItemType].Items.Count == _maxInventorySlot - 1 && 
-                _itemsByCategory[(int)newItem.ItemType].Items[idx].Amount >= _maxStackableItem)
+            if (_itemsByCategory[(int)newItem.ItemType].Items.Count == maxInventorySlot - 1 && 
+                _itemsByCategory[(int)newItem.ItemType].Items[idx].Amount >= maxStackable)
             {
                 Debug.Log("No space in inventory for this item");
                 Destroy(newItem.gameObject);
@@ -58,7 +62,7 @@ public class Inventory : Observer
             _itemsByCategory[(int)newItem.ItemType].Items[idx].Amount++;
             Destroy(newItem.gameObject);
         }
-        else if(_itemsByCategory[(int)newItem.ItemType].Items.Count != MaxInventorySlot)
+        else if(_itemsByCategory[(int)newItem.ItemType].Items.Count != maxInventorySlot)
         {
             _itemsByCategory[(int)newItem.ItemType].Items.Add(newItem);
             newItem.Amount = 1;
@@ -66,13 +70,18 @@ public class Inventory : Observer
             _inventoryUi.UpdateListItem(newItem.ItemType);
             newItem.gameObject.SetActive(false);
         }
+        else
+        {
+            Destroy(newItem.gameObject);
+            Debug.Log("Item not added -> no space in inventory");
+        }
     }
 
     int FindFirstAvailableSlotIndexByName(List<Item> collection, string name)
     {
         for (int i = 0; i < collection.Count; i++)
         {
-            if (collection[i].Name == name && collection[i].Amount < _maxStackableItem)
+            if (collection[i].Name == name && collection[i].Amount < collection[i].MaxAmount)
             {
                 return i;
             }
@@ -99,6 +108,20 @@ public class Inventory : Observer
             default:
                 break;
         }
+    }
+
+    public int GetMaxInventorySlots(int categoryIdx)
+    {
+        if (categoryIdx < 0 || categoryIdx >= _itemsByCategory.Count)
+        {
+            return 0;
+        }
+        InventorySettings.CategorySettings settings = new InventorySettings.CategorySettings();
+        if (_inventorySettings.GetSettings(_itemsByCategory[categoryIdx].Type, ref settings) && settings.MaxInventorySlots != 0)
+        {
+            return settings.MaxInventorySlots;
+        }
+        return _inventorySettings.DefaultMaxInventorySlot;
     }
 
     public struct ItemCategoryList

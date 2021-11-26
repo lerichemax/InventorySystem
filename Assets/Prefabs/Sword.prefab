@@ -48,6 +48,7 @@ MonoBehaviour:
   _description: Epic sword
   _image: {fileID: 2800000, guid: b9a5c008c79908f459d2528b3931c470, type: 3}
   _sellValue: 150
+  _maxAmount: 2
   _damage: 20
   _bleedingDamage: 10
   _bleedingTime: 3

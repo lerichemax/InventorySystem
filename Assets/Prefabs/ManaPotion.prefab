@@ -48,4 +48,5 @@ MonoBehaviour:
   _description: Restores Mana
   _image: {fileID: 2800000, guid: 45097d1f71176e3408ee55427a939c83, type: 3}
   _sellValue: 20
+  _maxAmount: 10
   _manaToRestore: 25

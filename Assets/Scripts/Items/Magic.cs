@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Magic : Item
 {
+    [Space]
     [SerializeField] protected float _magicalDamage;
 
     void Awake()

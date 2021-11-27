@@ -17,5 +17,7 @@ Possibility to change the amount of inventory slot by category (via InventorySet
 
 Possibility to change the amount of stackable item per item (via Item script).
 
+Use the InventorySettings script on the Player gameobject to choose the maximum amount of each kind of time the inventpry can store.
+
 To be added:
 - Scrolling

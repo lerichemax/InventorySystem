@@ -14,10 +14,9 @@ Controls :
 Navigation with mouse or keyboard or controller.
 
 Possibility to change the amount of inventory slot by category (via InventorySettings script).
+Use the InventorySettings script on the Player gameobject to choose the maximum amount of each kind of item the inventory can store.
 
 Possibility to change the amount of stackable item per item (via Item script).
-
-Use the InventorySettings script on the Player gameobject to choose the maximum amount of each kind of time the inventpry can store.
 
 To be added:
 - Scrolling
